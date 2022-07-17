@@ -21,7 +21,17 @@ export class DayController {
 
   @Get(':date')
   async getByDay(@Param('date') date: string) {
-    return await this.DayCervice.getByDate(date);
+    return await this.DayCervice.getTotalByDate(date);
+  }
+
+  @Get('/total/:date')
+  async getTotalByDay(@Param('date') date: string) {
+    return await this.DayCervice.getTotalByDate(date);
+  }
+
+  @Get('/state/:state')
+  async getByState(@Param('state') state: string) {
+    return await this.DayCervice.getByState(state);
   }
 
 }

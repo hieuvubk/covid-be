@@ -50,4 +50,25 @@ export class DayService {
   async getByDate(date: string): Promise<Day[]> {
     return this.dayModel.find({date: date}).exec();
   }
+
+  async getTotalByDate(date: string): Promise<any> {
+    const res = {
+      confirmed: 0,
+      recovered: 0,
+      deceased: 0,
+      tested: 0,
+    }
+    const data = await this.dayModel.find({date: date}).exec();
+    data.map((day) => {
+      res.confirmed += day.confirmed
+      res.recovered += day.recovered
+      res.deceased += day.deceased
+      res.tested += day.tested
+    })
+    return res;
+  }
+
+  async getByState(state: string): Promise<Day[]> {
+    return this.dayModel.find({state: state}).exec();
+  }
 }
